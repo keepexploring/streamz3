@@ -1,5 +1,8 @@
 # streamz3
 
+This is a modified version of https://github.com/mrocklin/streamz with some additional functions and scheduling capability.
+________________________________________________
+
 create functions in analysis_functions1.py
 
 Add the analysis pipelines in the 'add_data' function in the analysis_framework file
