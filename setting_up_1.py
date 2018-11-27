@@ -1,7 +1,7 @@
 %load_ext autoreload
 %autoreload 2
 from streamz3 import Stream
-import analysis_framework41 as AF
+import pipelines as AF
 s = AF.Streaming()
 # s.add_data({'id_':'testing','value':4})
 # s.add_data({'id_':'testing1','value':3})

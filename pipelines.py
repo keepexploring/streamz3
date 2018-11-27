@@ -1,25 +1,12 @@
 from streamz3 import Stream
 from analysis_functions1 import *
 from scheduler import Scheduler
+from streamz3.create_filter import StreamingFilter
 import pdb
 
-class Streaming():
+class Streaming(StreamingFilter):
     def __init__(self):
-        self.source = Stream()
-        self.filters={}
-        self.function_chains=[]
-        self.functions = []
-
-    def create_filter(self,data):
-        #pdb.set_trace()
-        if data["id_"] not in self.filters.keys():
-            self.filters[data["id_"]]=self.source.filter(lambda x: x["id_"]==data["id_"])
-            return True
-        else:
-            return False
-            # the other functions we want to carryout as part of the analysis will go after the filter function
-            # This allow us to carry out the same analysis for multiple sensors
-            # We should include the timestamp in the data and after this prototype write it so that it works as a numpy array
+        super().__init__()
 
     def add_data(self,x):
         #pdb.set_trace()
