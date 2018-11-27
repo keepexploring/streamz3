@@ -1,6 +1,6 @@
 from streamz3 import Stream
 from analysis_functions1 import *
-from scheduler import Scheduler
+from streamz3.scheduler import Scheduler
 from streamz3.create_filter import StreamingFilter
 import pdb
 
