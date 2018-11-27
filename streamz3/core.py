@@ -1,8 +1,9 @@
 from __future__ import absolute_import, division, print_function
+# import sys,os
+# sys.path.append(os.getcwd()+'/streamz3')
 
 from collections import deque
 from time import time
-
 import toolz
 from tornado import gen
 from tornado.locks import Condition
@@ -10,8 +11,9 @@ from tornado.ioloop import IOLoop
 from tornado.queues import Queue
 from collections import Iterable
 import numpy as np
-import ndeque_v2 as ndeque
-import pdeque as pdeque
+
+import streamz3.ndeque_v2 as ndeque
+import streamz3.pdeque as pdeque
 import pdb
 
 no_default = '--no-default--'
