@@ -11,11 +11,12 @@ class Streaming(StreamingFilter):
         super().__init__()
 
     async def add_data(self,x):
+        """The data pipelines are currently defined here - this may change in a future release"""
         ss = self.create_filter(x)
         if ss == True: # if there id is new, i.e. data is coming from a new source
             try:
                 self.filters[x["_id_"]].bulk_load(headings=['index','apples','mangos']).map(analyse).sink(save_data1)
-            
+                
             except KeyError as ex:
                 print(ex)
                 raise KeyError("the data must contain an id key in the form '_id_' ")
