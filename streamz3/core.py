@@ -14,7 +14,7 @@ import numpy as np
 
 import streamz3.ndeque_v2 as ndeque
 import streamz3.pdeque as pdeque
-import pdb
+
 
 no_default = '--no-default--'
 
