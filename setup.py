@@ -16,5 +16,5 @@ setup(name='streamz4',
       license='BSD',
       keywords='streams',
       packages=packages + tests,
-      install_requires=[tornado, toolz, zict, six],
+      install_requires=['tornado', 'toolz', 'zict', 'six'],
       zip_safe=False)
