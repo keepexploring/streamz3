@@ -18,19 +18,21 @@ def rolling_mean(x): # we can inherit these functions maybe/import
 
 def fpfunction(bb):
     #pdb.set_trace()
-    breakpoint()
+  
     data = hello['data']
     return {'_id_':bb['id_'], 'data':data['apples'].iloc[0]*data['mangos'].iloc[0]}
 
 
 @package_stream
 def analyse(data):
+   
     print(data)
     return data
 
-
-def save_data1(cc): # e.g. this might be the mean or something
+@package_stream
+def save_data1(data): # e.g. this might be the mean or something
     #pdb.set_trace()
+   
     db = TinyDB('db17.json')
-    print(cc)
+    print(data)
     #db.insert({'_id_':cc["_id_"],'data':cc['data']})

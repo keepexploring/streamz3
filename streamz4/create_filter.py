@@ -11,6 +11,7 @@ class StreamingFilter():
         self.function_chains=[]
         self.functions = []
 
+    
     def create_filter(self,data):
         #pdb.set_trace()
         try:
