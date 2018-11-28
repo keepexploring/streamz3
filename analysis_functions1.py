@@ -1,4 +1,6 @@
 from tinydb import TinyDB, Query
+
+from streamz4.decorators import package_stream
 import numpy as np
 import pandas as pd
 import pdb
@@ -14,20 +16,21 @@ def rolling_mean(x): # we can inherit these functions maybe/import
     #pdb.set_trace()
     return {'mean':rolling_mean,'_id_':x[0]['_id_']}
 
-def fp(bb):
+def fpfunction(bb):
     #pdb.set_trace()
     breakpoint()
-    data = bb['data']
+    data = hello['data']
     return {'_id_':bb['id_'], 'data':data['apples'].iloc[0]*data['mangos'].iloc[0]}
 
+
+@package_stream
 def analyse(data):
-    breakpoint()
     print(data)
-    return {'_id_':data['_id_'], 'data': data}
+    return data
 
 
 def save_data1(cc): # e.g. this might be the mean or something
     #pdb.set_trace()
     db = TinyDB('db17.json')
-   
-    db.insert({'_id_':cc["_id_"],'data':cc['data']})
+    print(cc)
+    #db.insert({'_id_':cc["_id_"],'data':cc['data']})

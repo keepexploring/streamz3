@@ -555,7 +555,6 @@ class map(Stream):
         stream_name = kwargs.pop('stream_name', None)
         self.kwargs = kwargs
         self.args = args
-
         Stream.__init__(self, upstream, stream_name=stream_name)
 
     def update(self, x, who=None):
@@ -566,6 +565,30 @@ class map(Stream):
             raise
         else:
             return self._emit(result)
+
+# @Stream.register_api()
+# class pmap(Stream):
+#     def __init__(self, upstream, func, *args, **kwargs):
+#         self.func = func
+#         #self.headings = headings
+#         #self.buffer = pdeque.Pdeque(window_size=0,batch_time=-1,interval=-1,schedule=-1, headings=self.headings)
+#         # this is one of a few stream specific kwargs
+        
+#         stream_name = kwargs.pop('stream_name', None)
+#         self.kwargs = kwargs
+#         self.args = args
+
+#         Stream.__init__(self, upstream, stream_name=stream_name)
+
+#     def update(self, x, who=None):
+#         try:
+#             result = self.func(x, *self.args, **self.kwargs)
+#         except Exception as e:
+#             logger.exception(e)
+#             raise
+#         else:
+#             return self._emit(result)
+
 
 
 @Stream.register_api()
@@ -774,10 +797,10 @@ class sliding_window(Stream):
 
 @Stream.register_api()
 class sliding_window_pandas(Stream):
-    def __init__(self, n, e, child, **kwargs):
+    def __init__(self, n, e, child, headings, **kwargs):
         self.n = n
         self.e = e
-        self.headings=kwargs['headings']
+        self.headings=headings
         #self.buffer = deque(maxlen=n)
         self.buffer = ndeque.Ndeque(maxlen=self.n,elements=self.e, headings=self.headings)
         Stream.__init__(self, child, **kwargs)
@@ -801,7 +824,7 @@ class sliding_time_window_pandas_scheduled(Stream):
         #pdb.set_trace()
         self.buffer.append(x['data']) # the data must arrive as a dictionary, with the numpy data stored under the key 'data'
         if (self.buffer.push_scheduler() is True):
-            return self.emit({'id_':x['id_'], 'data':self.buffer.send()})
+            return self.emit({'id_':x['_id_'], 'data':self.buffer.send()})
         else:
             return []
 
