@@ -12,16 +12,22 @@ def rolling_mean(x): # we can inherit these functions maybe/import
     aa=[i['value'] for i in x] # this is what we need to
     rolling_mean=np.mean(aa)
     #pdb.set_trace()
-    return {'mean':rolling_mean,'id_':x[0]['id_']}
+    return {'mean':rolling_mean,'_id_':x[0]['_id_']}
 
 def fp(bb):
     #pdb.set_trace()
+    breakpoint()
     data = bb['data']
-    return {'id_':bb['id_'], 'data':data['apples'].iloc[0]*data['mangos'].iloc[0]}
+    return {'_id_':bb['id_'], 'data':data['apples'].iloc[0]*data['mangos'].iloc[0]}
+
+def analyse(data):
+    breakpoint()
+    print(data)
+    return {'_id_':data['_id_'], 'data': data}
 
 
 def save_data1(cc): # e.g. this might be the mean or something
     #pdb.set_trace()
     db = TinyDB('db17.json')
    
-    db.insert({'id_':cc["id_"],'data':cc['data']})
+    db.insert({'_id_':cc["_id_"],'data':cc['data']})

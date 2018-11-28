@@ -11,7 +11,7 @@ s = pl.Streaming()
 
 async def fill_pipeline():
     while True:
-        await s.add_data({'_id_':'testing', 'data':np.array([1,2,3])})
+        await s.add_data({'_id_':'testing', 'data':np.array( [ [1,2,3],[2,3,6], [3,3,6] ] ) })
         sleep(2)
         print("data_added")
 

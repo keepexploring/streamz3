@@ -15,6 +15,7 @@ class Pdeque():
         self.n_array=np.zeros(self.elements) # create an empty array
         self.state = False
         self.next_time = 0
+        self.to_return = None
         
         if (window_size == -1):
             self.schedule = schedule.get_interval()
@@ -115,6 +116,8 @@ class Pdeque():
 
     def send(self):
         #pdb.set_trace()
+        if self.to_return is None:
+            self.to_return = self.n_array
         for el in range(0,self.elements):
             if self.headings is not None:
                 if self.headings[0] == 'index':

@@ -19,7 +19,9 @@ class Streaming(StreamingFilter):
             #self.filters[x["id_"]].sliding_window_pandas(3,3,headings=['index','apples','mangos']).map(fp)
             #self.filters[x["id_"]].sliding_time_window_pandas(batch_time=2, window_size=4, interval=1, headings=['index','apples','mangos']).map(fp).sink(save_data1)
             try:
-                self.filters[x["_id_"]].sliding_time_window_pandas_scheduled( schedule=Scheduler().every().minute.at('0:0:0'), headings=['index','apples','mangos']).map(fp).sink(save_data1)
+                #self.filters[x["_id_"]].sliding_time_window_pandas_scheduled( schedule=Scheduler().every().minute.at('0:0:0'), headings=['index','apples','mangos']).map(fp).sink(save_data1)
+                self.filters[x["_id_"]].bulk_load(headings=['index','apples','mangos']).map(analyse).sink(save_data1)
+            
             except KeyError as ex:
                 print(ex)
                 raise KeyError("the data must contain an id key in the form '_id_' ")

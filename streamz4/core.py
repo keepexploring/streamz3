@@ -806,6 +806,18 @@ class sliding_time_window_pandas_scheduled(Stream):
             return []
 
 @Stream.register_api()
+class bulk_load(Stream):
+    def __init__(self, child, headings, **kwargs):
+        self.headings = headings
+        self.buffer = pdeque.Pdeque(window_size=0,batch_time=-1,interval=-1,schedule=-1, headings=self.headings)
+        Stream.__init__(self, child, **kwargs)
+    
+    def update(self, x, who=None):
+        self.buffer.append(x['data'])
+        return self.emit({'_id_':x['_id_'], 'data':self.buffer.send()})
+
+
+@Stream.register_api()
 class sliding_window_numpy(Stream):
     def __init__(self, n, e, child, **kwargs):
         self.n = n
@@ -841,7 +853,6 @@ class timed_window_pandas(Stream):
     def cb(self):
         #pdb.set_trace()
         while True:
-
             L, self.buffer = self.buffer.dataframe(), ndeque.Ndeque(elements=self.elements)
             self.last = self.emit(L)
             yield self.last
